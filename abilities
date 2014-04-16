@@ -1,0 +1,58 @@
+using UnityEngine;
+using System.Collections;
+
+public class Abilities : MonoBehaviour {
+	//Variables
+	private bool buttonPressed = false;
+
+	//AbilityCooldowns
+	private float _qCooldown = 0.0f;
+	private bool _qOnCooldown = false;
+
+	// Use this for initialization
+	void Start () {
+	
+	}
+
+	public void OnGUI() {
+		if (buttonPressed == false) {
+			if (Event.current.type == EventType.KeyDown) {
+				buttonPressed = true;
+				buttonPress();
+				print ("Any key pressed!");
+			}
+		}
+		if (buttonPressed == true) {
+			if (Event.current.type == EventType.KeyUp) {
+				buttonPressed = false;
+				print ("Any key released!");	
+			}
+		}
+	}
+
+
+
+
+	void buttonPress(){
+		if (Input.GetKey ("q")) {
+			if (_qOnCooldown == false) {
+				print ("Q Ability Activated");
+				_qCooldown = 3.0f;
+				_qOnCooldown = true;
+			}
+			else {
+				print ("On Cooldown");
+			}
+		}
+
+	}
+
+	void Update(){
+		if (_qOnCooldown == true) {
+			_qCooldown = _qCooldown-Time.deltaTime;
+			if (_qCooldown <= 0){
+				_qCooldown = 0;
+				_qOnCooldown = false;
+			}
+		}
+	}
