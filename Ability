@@ -1,0 +1,46 @@
+    class Ability{
+        var name : String;
+        var cooldownTime : float;
+        var nextAttackTime : float;
+        var castTime : float;
+        var range : float;
+        var baseDamage : float;
+       
+        var me : Transform;
+       
+        function Ability(user : Transform){
+            me = user;
+            name = "BLANK";
+            cooldownTime = 1.0;
+            nextAttackTime = 0.0;
+            castTime = 0.0;
+            range = 1.0;
+        }
+       
+        function CooldownPercentage() : float{
+            if(Time.time >= nextAttackTime) return 0;
+            var startTime = nextAttackTime - cooldownTime;
+            return (Time.time - startTime) / (nextAttackTime - startTime);
+        }
+       
+        function CooldownTimeRemaining() : float{
+            return CooldownPercentage() * cooldownTime;
+        }
+       
+        function IsInRange(target : Transform){
+            return Vector3.Distance(me.position, target.postion)<= range;
+        }
+       
+        function Damage(){
+            return baseDamage;
+        }
+       
+        function Attack(target : Transform){
+            if(!IsInRange(target)) return;
+            if(Time.time < nextAttackTime) return;
+            target.gameObject.SendMessage("Damage", Damage(), SendMessageOptions.DontRequireReceiver);
+            nextAttackTime = Time.time + cooldownTime;
+           
+            // do animation effects or whatever
+        }
+    }
