@@ -1,0 +1,40 @@
+#pragma strict
+var keyDown;
+var isOnCooldown = false;
+var cooldownTime : float = 3.0;
+var cooldownOff : float = 0.0;
+
+function Update () {
+	if (Input.GetKeyDown("q") && !keyDown){
+		Cast();
+		keyDown = true;
+	}
+	
+	if (Input.GetKeyUp("q")){
+		keyDown = false;
+	}
+	
+	if (cooldownOff < Time.time){
+		isOnCooldown = false;
+	}
+}
+
+function Cast(){
+
+
+	if (!isOnCooldown){
+		setCooldown();
+		//Perform Effects
+		print("Q Ability Successfully used!");
+	}
+	else{
+		print(cooldownOff - Time.time + " seconds till off cooldown!");
+	}
+
+
+}
+
+function setCooldown(){
+	isOnCooldown = true;
+	cooldownOff = Time.time + cooldownTime;
+} 
