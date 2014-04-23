@@ -1,0 +1,22 @@
+    var target : Transform;
+    var healthbar : GUITexture;
+    var healthbarWidth : int;
+    
+    
+    function Update (){
+    	SetTarget();
+    	SetHealth();		  
+    }
+    
+    function SetHealth (){
+    	healthbar.pixelInset.width = healthbarWidth;
+    	if(healthbarWidth < 0){
+    	healthbarWidth = 0;
+    	}
+    }
+    
+    function SetTarget (){
+    	//Sets healthbar position to the position of target
+        var wantedPos = Camera.main.WorldToViewportPoint (target.position+Vector3(0.15,0.75,0));
+        transform.position = wantedPos;
+    }
