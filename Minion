@@ -1,0 +1,30 @@
+public class Minion extends UnityEngine.MonoBehaviour{
+	var health : int;
+	var damage : int; //Temporary variable to symbolize player damage
+	
+	function Start(){
+		damage = 0; 
+		Spawn();
+		takeDamage();
+	}
+	
+	function Spawn(){
+		health = 250;
+	
+	}
+	
+	
+	
+	function takeDamage(){
+		health -= damage;
+		print("damage taken!");
+		if (health <= 0){
+			Die();
+		}
+		
+	}
+	
+	function Die(){
+		print("I died!");
+	}	
+}
