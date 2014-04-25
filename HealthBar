@@ -1,22 +1,33 @@
-    var target : Transform;
+public class HealthBar extends Minion{
+	var target : Transform;
     var healthbar : GUITexture;
     var healthbarWidth : int;
+    var healthInstance : int;
     
-    
+	function Start(){
+  	healthInstance = GameObject.Find("minion").GetComponent("Minion").health;
+  	}
+ 
     function Update (){
     	SetTarget();
-    	SetHealth();		  
+     	SetHealth();
     }
     
     function SetHealth (){
-    	healthbar.pixelInset.width = healthbarWidth;
-    	if(healthbarWidth < 0){
-    	healthbarWidth = 0;
-    	}
+   		healthbar.pixelInset.width = healthbarWidth;
+      	healthbarWidth = (GameObject.Find("minion").GetComponent("Minion").health)/(healthInstance/100);
+      	
+      if(healthbarWidth < 0){
+      	healthbarWidth = 0;
+      }
+      //else if(healthbarWidth > 100){
+      	//healthbarWidth = 100;
+      //}
     }
     
     function SetTarget (){
-    	//Sets healthbar position to the position of target
+     	//Sets healthbar position to the position of target
         var wantedPos = Camera.main.WorldToViewportPoint (target.position+Vector3(0.15,0.75,0));
         transform.position = wantedPos;
     }
+}
