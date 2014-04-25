@@ -1,0 +1,20 @@
+#pragma strict
+var minion : Transform;
+
+function Start () {
+	yield SpawnTimes();
+}
+
+function SpawnTimes(){
+	Spawn(1,1);
+	yield WaitForSeconds(5);
+	Spawn(2,2);
+	yield WaitForSeconds(5);
+	Spawn(3,3);
+	yield WaitForSeconds(5);
+	Spawn(4,4);
+}
+
+function Spawn (x : int, z : int) {
+	Instantiate(minion, Vector3 (x, 0.5, z), Quaternion.identity);
+}
