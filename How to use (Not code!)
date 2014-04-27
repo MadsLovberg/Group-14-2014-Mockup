@@ -1,0 +1,11 @@
+>Create minion prefab, with healthbar added as child. 
+>Create spawner Object (empty) - Add spawn script. 
+>Add minion prefab to spawn script. 
+>Customise spawn script to make minions spawn in desired positions.
+
+Next Steps:
+>Create projectile prefab
+>Add prefab to abilityQ
+>Add projectile script to projectile prefab
+
+>3D collision etc.
