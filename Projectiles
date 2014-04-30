@@ -1,0 +1,26 @@
+using UnityEngine;
+using System.Collections;
+
+public class Snowball : MonoBehaviour 
+{
+	public float speed;
+
+	void Update () 
+	{
+		transform.Translate(Vector3.right * Time.deltaTime * speed);
+
+		if(transform.position.x >= 10)
+		{
+			Destroy(this.gameObject);
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other) 
+	{
+		if(other.gameObject.tag == "Enemy")
+		{
+			other.gameObject.GetComponent<Enemy>().Hurt();
+			Destroy(this.gameObject);
+		}
+	}
+}
